@@ -1,6 +1,7 @@
 using MinimalApi.Endpoint.Extensions;
 using SwimmingTool.Infrastructure.DataAccess;
 using SwimmingTool.Domain;
+using SwimmingTool.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddScoped(typeof(IAsyncRepository<,>), typeof(EfRepository<,>))
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(config => config.EnableAnnotations());
+builder.Services.AddCommandsAndQueries();
 
 var app = builder.Build();
 

@@ -1,29 +1,32 @@
-﻿using MinimalApi.Endpoint;
+﻿using MediatR;
+using MinimalApi.Endpoint;
 using SwimmingTool.Domain;
+using static SwimmingTool.Application.Swimmers.Commands.V1;
 
-namespace SwimmingTool.Api.Swimmer
+namespace SwimmingTool.Api.Swimmer;
+
+public class Create : IEndpoint<IResult, CreateSwimmerCommand>
 {
-    public class Create : IEndpoint<IResult, CreateSwimmerCommand>
-    {
-        private IAsyncRepository<Domain.Swimmer, int> _swimmerRepository;
-        public void AddRoute(IEndpointRouteBuilder app)
-        {
-            app.MapPost("/swimmers", async (CreateSwimmerCommand command, IAsyncRepository<Domain.Swimmer, int> swimmerRepository) =>
-            {
-                _swimmerRepository = swimmerRepository;
-                return await HandleAsync(command);
-            })
-                .Produces<SwimmerCreateRespone>()
-                .WithTags("SwimmersApi");
-        }
+  private readonly IMediator mediator;
 
-        public async Task<IResult> HandleAsync(CreateSwimmerCommand command)
-        {
-            var swimmer = Domain.Swimmer.CreateSwimmer(command.Name, command.category);
-            await _swimmerRepository.AddAsync(swimmer, new CancellationToken());
-            var response = new SwimmerCreateRespone(swimmer.Id, swimmer.Name, swimmer.Category);
-            return Results.Created($"/swimmers/{swimmer.Id}", response);
+  public Create(IMediator mediator)
+  {
+    this.mediator = mediator;
+  }
 
-        }
-    }
+  public void AddRoute(IEndpointRouteBuilder app)
+  {
+    app.MapPost("/swimmers", (CreateSwimmerCommand command) =>
+    {            
+      return HandleAsync(command);
+    })
+        .Produces<SwimmerCreateRespone>()
+        .WithTags("SwimmersApi");
+  }
+
+  public async Task<IResult> HandleAsync(CreateSwimmerCommand command)
+  {
+    var result = await mediator.Send(command);
+    return Results.Created($"/swimmers/{result.Id}", result);
+  }
 }
