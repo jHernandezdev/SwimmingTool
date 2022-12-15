@@ -17,6 +17,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(config => config.EnableAnnotations());
 builder.Services.AddCommandsAndQueries();
+builder.Services.AddValidators();
+builder.Services.AddValidationPipelineBehaviour();
 
 var app = builder.Build();
 
