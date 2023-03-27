@@ -1,15 +1,21 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.32912.340
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwimmingTool.Api", "SwimmingTool.Api\SwimmingTool.Api.csproj", "{1A4B52C1-7A42-4402-8EEA-0ECED21078E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwimmingTool.Api", "src\SwimmingTool.Api\SwimmingTool.Api.csproj", "{1A4B52C1-7A42-4402-8EEA-0ECED21078E7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwimmingTool.Infrastructure", "SwimmingTool.Infrastructure\SwimmingTool.Infrastructure.csproj", "{05FB0630-6F15-4A7D-96DE-F4444AD5AA50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwimmingTool.Infrastructure", "src\SwimmingTool.Infrastructure\SwimmingTool.Infrastructure.csproj", "{05FB0630-6F15-4A7D-96DE-F4444AD5AA50}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwimmingTool.Domain", "SwimmingTool.Domain\SwimmingTool.Domain.csproj", "{8A1B0EEB-9E96-41DC-A125-54986553AAC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwimmingTool.Domain", "src\SwimmingTool.Domain\SwimmingTool.Domain.csproj", "{8A1B0EEB-9E96-41DC-A125-54986553AAC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwimmingTool.Application", "SwimmingTool.Application\SwimmingTool.Application.csproj", "{63C2CA37-2DF8-42F8-88D8-B2EC820E9A5D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwimmingTool.Application", "src\SwimmingTool.Application\SwimmingTool.Application.csproj", "{63C2CA37-2DF8-42F8-88D8-B2EC820E9A5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AAB722A7-C4F0-487E-8521-1521B1D742D8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{428A842C-D040-4FFF-B896-0D0C9B29A288}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwimmingTool.Api.Tests", "test\SwimmingTool.Api.Tests\SwimmingTool.Api.Tests.csproj", "{57041EFF-EA05-49BE-9708-DBF42A7EB8F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,11 +39,22 @@ Global
 		{63C2CA37-2DF8-42F8-88D8-B2EC820E9A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63C2CA37-2DF8-42F8-88D8-B2EC820E9A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63C2CA37-2DF8-42F8-88D8-B2EC820E9A5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57041EFF-EA05-49BE-9708-DBF42A7EB8F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57041EFF-EA05-49BE-9708-DBF42A7EB8F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57041EFF-EA05-49BE-9708-DBF42A7EB8F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57041EFF-EA05-49BE-9708-DBF42A7EB8F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9863FFF9-49F7-403F-A7CE-908362ACC037}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1A4B52C1-7A42-4402-8EEA-0ECED21078E7} = {AAB722A7-C4F0-487E-8521-1521B1D742D8}
+		{63C2CA37-2DF8-42F8-88D8-B2EC820E9A5D} = {AAB722A7-C4F0-487E-8521-1521B1D742D8}
+		{8A1B0EEB-9E96-41DC-A125-54986553AAC4} = {AAB722A7-C4F0-487E-8521-1521B1D742D8}
+		{05FB0630-6F15-4A7D-96DE-F4444AD5AA50} = {AAB722A7-C4F0-487E-8521-1521B1D742D8}
+		{57041EFF-EA05-49BE-9708-DBF42A7EB8F9} = {428A842C-D040-4FFF-B896-0D0C9B29A288}
 	EndGlobalSection
 EndGlobal
