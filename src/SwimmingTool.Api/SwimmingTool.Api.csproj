@@ -4,6 +4,8 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<DockerComposeProjectPath>../../docker-compose.dcproj</DockerComposeProjectPath>
+		<UserSecretsId>60b4fd73-43e3-45fe-99bf-e2c6c3ca0544</UserSecretsId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'SwimmingTool' " />
