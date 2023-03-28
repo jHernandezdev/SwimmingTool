@@ -19,18 +19,19 @@ stages:
             inputs:
               command: restore
               projects: src/**/*csproj
+
           - task: DotNetCoreCLI@2
             displayName: Compilacion de los proyectos
             inputs:
               command: build
               projects: src/**/*csproj
-              arguments: '--configuration $(BuildConfiguration)'
+              arguments: '--configuration $(BuildConfiguration)'          
 
           - task: DotNetCoreCLI@2
             displayName: Test
             inputs:
               command: test
-              projects: tests/**/*.csproj
+              projects: test/**/*.csproj
               arguments: '--configuration $(BuildConfiguration) --collect "Code coverage"'
             
           - task: PublishTestResults@2
@@ -46,26 +47,39 @@ stages:
               codeCoverageTool: Cobertura
               summaryFileLocation: $(Agent.TempDirectory)/*.coverage
 
-          - script: |
-              docker-compose up --force-recreate --build --detach
-            workingDirectory: .
-            displayName: Lanzar Docker Compose
-
-          - task: Bash@3
-            displayName: Verificar Docker container
+          - task: CopyFiles@2
+            displayName: 'Copy build files'
+            inputs:              
+              TargetFolder: '$(build.artifactstagingdirectory)\frontend\hss.net'
+              CleanTargetFolder: true
+              OverWrite: true
+              
+          - task: PublishBuildArtifacts@1
+            displayName: Generando artefacto
             inputs:
-              targetType: inline
-              script: |
-                sleep 30
-                testCondition=$(docker inspect --format="{{.State.Running}}" catalog_api)
-                if [ "$testCondition" == "false" ]; then
-                  echo "The container is not running" >&2
-                  exit 1;
-                else
-                  echo "The container is running" >&2
-                  exit 0
-                fi
-          - script: |
-              docker-compose -f docker-compose.yml down
-            displayName: Parar Docker compose
-            workingDirectory: .
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)/build.zip'
+              ArtifactName: Raet.Hss.Frontend      
+
+          # - script: |
+          #     docker-compose up --force-recreate --build --detach
+          #   workingDirectory: .
+          #   displayName: Lanzar Docker Compose
+
+          # - task: Bash@3
+          #   displayName: Verificar Docker container
+          #   inputs:
+          #     targetType: inline
+          #     script: |
+          #       sleep 30
+          #       testCondition=$(docker inspect --format="{{.State.Running}}" catalog_api)
+          #       if [ "$testCondition" == "false" ]; then
+          #         echo "The container is not running" >&2
+          #         exit 1;
+          #       else
+          #         echo "The container is running" >&2
+          #         exit 0
+          #       fi
+          # - script: |
+          #     docker-compose -f docker-compose.yml down
+          #   displayName: Parar Docker compose
+          #   workingDirectory: .
