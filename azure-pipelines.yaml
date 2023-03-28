@@ -32,6 +32,14 @@ stages:
               projects: tests/**/*.csproj
               arguments: '--configuration $(BuildConfiguration) --collect "Code coverage"'
             
+          - task: DotNetCoreCLI@2
+            displayName: Publish
+            inputs:
+              command: publish
+              publishWebProjects: False
+              arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)/SwimmingTool_$(Build.BuildNumber)'
+              zipAfterPublish: True
+
           - task: PublishTestResults@2
             displayName: Publicacion de resultados de test
             inputs:
@@ -55,8 +63,9 @@ stages:
           - task: PublishBuildArtifacts@1
             displayName: Generando artefacto
             inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)/build'
-              ArtifactName: Raet.Hss.Frontend     
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)/SwimmingTool_$(Build.BuildNumber)'
+              ArtifactName: 'SwimmingTool_LatestBuild'
+              publishLocation: 'Container'
 
           # - script: |
           #     docker-compose up --force-recreate --build --detach
