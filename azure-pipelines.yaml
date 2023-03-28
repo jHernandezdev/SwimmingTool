@@ -48,14 +48,14 @@ stages:
           - task: CopyFiles@2
             displayName: 'Copy build files'
             inputs:              
-              TargetFolder: '$(build.artifactstagingdirectory)\frontend\hss.net'
+              TargetFolder: '$(build.artifactstagingdirectory)/build'
               CleanTargetFolder: true
               OverWrite: true
               
           - task: PublishBuildArtifacts@1
             displayName: Generando artefacto
             inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)/build.zip'
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)/build'
               ArtifactName: Raet.Hss.Frontend     
 
           # - script: |
