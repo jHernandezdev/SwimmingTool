@@ -1,0 +1,28 @@
+name: Build
+
+resources:
+  pipelines:
+    - pipeline: _SwimmingTool.Api.CI
+      source: SwimmingTool.Api.CI
+      branch: main
+
+stages:
+  - stage: Build_Image
+    displayName: Download artefact and build iamge
+    jobs:
+      - job: 
+        pool: Default 
+        steps:          
+        - task: ExtractFiles@1
+          displayName: 'Extract files from _SwimmingTool.Api.CI/SwimmingTool_LatestBuild/*.zip'
+          inputs:
+            archiveFilePatterns: '_SwimmingTool.Api.CI/SwimmingTool_LatestBuild/*.zip'
+            destinationFolder: 'Build.StagingDirectory/SwimmingTool_LatestBuild'
+            cleanDestinationFolder: true
+          continueOnError: true
+        
+        - task: DeleteFiles@1
+          displayName: 'Delete files from _SwimmingTool.Api.CI/SwimmingTool_LatestBuild/*.zip'
+          inputs:
+            SourceFolder: '_SwimmingTool.Api.CI/SwimmingTool_LatestBuild'
+            Contents: '*.zip'
