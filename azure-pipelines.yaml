@@ -11,8 +11,7 @@ stages:
     displayName: Build and test in a container
     jobs:
       - job: 
-        pool:
-          vmImage: ubuntu-latest
+        pool: Default          
         steps:          
           - task: DotNetCoreCLI@2
             displayName: Restauracion de dependencias
