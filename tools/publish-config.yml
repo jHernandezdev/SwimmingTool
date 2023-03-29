@@ -7,8 +7,8 @@ trigger:
     - tools
 
 stages:
-  - stage: BuildAndTest
-    displayName: Build and test in a container
+  - stage: PublishConfig
+    displayName: Publish config
     jobs:
       - job: 
         pool: Default 
