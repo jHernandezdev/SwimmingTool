@@ -16,6 +16,6 @@ stages:
         - task: PublishBuildArtifacts@1
           displayName: Generando artefacto
           inputs:
-            PathtoPublish: '/tools/config.json'
+            PathtoPublish: 'tools/config.json'
             ArtifactName: 'SwimmingTool_Config'
             publishLocation: 'Container'
