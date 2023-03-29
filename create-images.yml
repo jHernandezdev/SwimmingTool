@@ -32,7 +32,9 @@ stages:
 
         - task: Docker@2
           inputs:
-            command: build
+            command: buildAndPush
+            containerRegistry: 'Jmhh-Production-Acr'
+            repository: SwimmingTool
             Dockerfile: '$(Build.StagingDirectory)/Dockerfile'
             buildContext: '$(Build.StagingDirectory)'
             
