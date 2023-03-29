@@ -6,7 +6,7 @@ trigger:
     include:
     - tools
 
-  stages:
+stages:
   - stage: BuildAndTest
     displayName: Build and test in a container
     jobs:
