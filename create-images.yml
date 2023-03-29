@@ -8,6 +8,11 @@ resources:
       branch: main
       trigger: true
 
+    - pipeline: _SwimmingTool.Api.Config
+      source: SwimmingTool.Api.Config
+      branch: main
+      trigger: true
+
 stages:
   - stage: Build_Image
     displayName: Download artefact and build iamge
@@ -19,6 +24,10 @@ stages:
         - download: _SwimmingTool.Api.CI
           displayName: Download artefact
           artifact: 'SwimmingTool_LatestBuild'
+
+        - download: _SwimmingTool.Api.Config
+          displayName: Download config
+          artifact: 'SwimmingTool_Config'
 
         - task: ExtractFiles@1
           displayName: 'Extract files from _SwimmingTool.Api.CI/SwimmingTool_LatestBuild/*.zip'
