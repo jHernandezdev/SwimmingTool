@@ -1,0 +1,22 @@
+trigger:
+  branches:
+   include:     
+     - main
+  paths:
+    include:
+    - tools
+
+  stages:
+  - stage: BuildAndTest
+    displayName: Build and test in a container
+    jobs:
+      - job: 
+        pool: Default 
+        steps:
+        - task: PublishBuildArtifacts@1
+          displayName: Generando artefacto
+          inputs:
+            PathtoPublish: '/tools/config.json'
+            ArtifactName: 'SwimmingTool_Config'
+            publishLocation: 'Container'
+            
