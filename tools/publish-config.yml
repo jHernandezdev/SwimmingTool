@@ -1,7 +1,7 @@
 trigger:
   branches:
-   include:     
-     - main
+    include:     
+    - main
   paths:
     include:
     - tools
@@ -19,4 +19,3 @@ trigger:
             PathtoPublish: '/tools/config.json'
             ArtifactName: 'SwimmingTool_Config'
             publishLocation: 'Container'
-            
