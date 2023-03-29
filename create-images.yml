@@ -24,9 +24,22 @@ stages:
             destinationFolder: '$(Build.StagingDirectory)/SwimmingTool_LatestBuild'
             cleanDestinationFolder: true
           continueOnError: true
-        
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(Build.Repository.LocalPath)'
+            Contents: 'Dockerfile'
+            TargetFolder: '$(Build.StagingDirectory)'
+
+        - task: Docker@2
+          inputs:
+            command: build
+            Dockerfile: '$(Build.StagingDirectory)/Dockerfile'
+            buildContext: '$(Build.StagingDirectory)'
+            
         - task: DeleteFiles@1
           displayName: 'Delete files from _SwimmingTool.Api.CI/SwimmingTool_LatestBuild/*.zip'
           inputs:
             SourceFolder: '$(Pipeline.Workspace)/_SwimmingTool.Api.CI/SwimmingTool_LatestBuild'
             Contents: '*.zip'
+
+            
