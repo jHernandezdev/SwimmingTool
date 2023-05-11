@@ -25,7 +25,7 @@ stages:
             inputs:
               serviceConnectionEndpoint: 'Snyc'
               testType: 'app'
-              targetFile: 'src/**'
+              targetFile: 'src'
               monitorWhen: 'always'
               failOnIssues: true
               projectName: 'jHernandezdev/SwimmingTool'
