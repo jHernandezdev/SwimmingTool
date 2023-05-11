@@ -18,7 +18,8 @@ stages:
     displayName: Build and test in a container
     jobs:
       - job: 
-        pool: Default          
+        pool:
+          vmImage: ubuntu-latest          
         steps:          
           - task: SnykSecurityScan@1
             inputs:
