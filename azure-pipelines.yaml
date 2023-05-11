@@ -20,6 +20,13 @@ stages:
       - job: 
         pool: Default          
         steps:          
+        - task: SnykSecurityScan@1
+          inputs:
+            serviceConnectionEndpoint: 'Snyc'
+            testType: 'app'
+            monitorWhen: 'always'
+            failOnIssues: true
+            projectName: 'jHernandezdev/SwimmingTool'
           - task: DotNetCoreCLI@2
             displayName: Restauracion de dependencias
             inputs:
