@@ -25,7 +25,7 @@ stages:
             inputs:
               serviceConnectionEndpoint: 'Snyc'
               testType: 'app'
-              targetFile: '$(Build.Repository.LocalPath)/src'
+              targetFile: '$(Build.Repository.LocalPath)/src/SwimmingTool.Api'
               monitorWhen: 'always'
               failOnIssues: true
               projectName: 'jHernandezdev/SwimmingTool'
