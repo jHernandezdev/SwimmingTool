@@ -113,7 +113,7 @@ stages:
               containerRegistry: 'jmhh-acr'
               repository: 'ClubNatacion'              
               Dockerfile: 'containers/api/Dockerfile'
-              buildContext: 'src/'
+              buildContext: '.'
               tags: |
                 $(Build.BuildId)
                 latest
