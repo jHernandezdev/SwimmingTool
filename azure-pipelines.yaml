@@ -150,7 +150,9 @@ stages:
                     configMapArguments: 
                       --from-literal=conexionrepositorio="$(CONNECTIONSTRINGSWIMMINGTOOL)" 
                       --from-literal=conexionrabbit="$(CONNECTIONRABBITMQ)" 
-                      --from-literal=instrumentationkey="$(INSTRUMENTATIONKEY)"                     
+                      --from-literal=instrumentationkey="$(INSTRUMENTATIONKEY)"
+                      --from-literal=aspnetcoreenvironment="$(ASPNETCORE_ENVIRONMENT)"
+                      
                 - task: KubernetesManifest@0
                   displayName: Creacion del deployment y service
                   inputs:

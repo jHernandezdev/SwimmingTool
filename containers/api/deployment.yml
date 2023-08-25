@@ -33,7 +33,12 @@ spec:
               configMapKeyRef:              
                 name: variablesentornoswimmingtool              
                 key: instrumentationkey
-          
+          - name: ASPNETCORE_ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:              
+                name: variablesentornoswimmingtool              
+                key: aspnetcoreenvironment
+                
         image: jmhhregistry.azurecr.io/swimmingtool:latest
         imagePullPolicy: Always
         resources:
