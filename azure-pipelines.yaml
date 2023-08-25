@@ -112,7 +112,7 @@ stages:
               command: build
               containerRegistry: 'jmhh-acr'
               repository: 'ClubNatacion'              
-              Dockerfile: 'containers/api/src/Dockerfile'
+              Dockerfile: 'containers/api/Dockerfile'
               buildContext: 'src/'
               tags: |
                 $(Build.BuildId)
