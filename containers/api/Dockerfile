@@ -13,7 +13,7 @@ COPY ["src/SwimmingTool.Domain/SwimmingTool.Domain.csproj", "src/SwimmingTool.Do
 COPY ["src/SwimmingTool.Infrastructure/SwimmingTool.Infrastructure.csproj", "src/SwimmingTool.Infrastructure/"]
 RUN dotnet restore "src/SwimmingTool.Api/SwimmingTool.Api.csproj"
 COPY . .
-WORKDIR "/src/src/SwimmingTool.Api"
+WORKDIR "/src/SwimmingTool.Api"
 RUN dotnet build "SwimmingTool.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
