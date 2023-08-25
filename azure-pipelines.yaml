@@ -111,7 +111,7 @@ stages:
             inputs:
               command: build
               containerRegistry: 'jmhh-acr'
-              repository: 'ClubNatacion'              
+              repository: 'swimmingtool'              
               Dockerfile: 'containers/api/Dockerfile'
               buildContext: '.'
               tags: |
@@ -121,72 +121,42 @@ stages:
             displayName: Push image
             inputs:
               containerRegistry: 'jmhh-acr'
-              repository: 'ClubNatacion'
+              repository: 'swimmingtool'
               command: push
               tags: |
                 $(Build.BuildId)
                 latest
 
-      # - deployment: K8S_Desarrollo
-      #   dependsOn: Docker
-      #   displayName: Deploy to K8S develop cluster
-      #   #condition: ne(variables['Build.SourceBranchName'], 'main')
-      #   pool:
-      #       vmImage: 'ubuntu-latest'      
-      #   variables:
-      #   - group: operadores_desarrollo
-      #   environment: Desarrollo.default
-      #   strategy:
-      #     runOnce:
-      #       deploy:
-      #         steps:
-      #           - checkout: self
-      #           - task: Kubernetes@1
-      #             displayName: Creacion del ConfigMap
-      #             inputs:                  
-      #               forceUpdateConfigMap: true
-      #               configMapName: variablesentornooperadores
-      #               configMapArguments: --from-literal=conexionrepositorio="$(CONNECTIONSTRINGOPERADORES)" 
-      #               --from-literal=conexionrabbit="$(CONNECTIONRABBITMQ)" 
-      #               --from-literal=instrumentationkey="$(INSTRUMENTATIONKEY)" 
-      #               --from-literal=isactivated_gls_canalizaciones="$(ISACTIVATED_GLS_CANALIZACIONES)" 
-      #               --from-literal=isactivated_gls_estados="$(ISACTIVATED_GLS_ESTADOS)" 
-      #               --from-literal=isactivated_gls_registros="$(ISACTIVATED_GLS_REGISTROS)"
-      #               --from-literal=isactivated_sending_canalizaciones="$(ISACTIVATED_SENDING_CANALIZACIONES)" 
-      #               --from-literal=isactivated_sending_estados="$(ISACTIVATED_SENDING_ESTADOS)" 
-      #               --from-literal=isactivated_sending_registros="$(ISACTIVATED_SENDING_REGISTROS)" 
-      #               --from-literal=isactivated_tipsa_canalizaciones="$(ISACTIVATED_TIPSA_CANALIZACIONES)" 
-      #               --from-literal=isactivated_tipsa_estados="$(ISACTIVATED_TIPSA_ESTADOS)" 
-      #               --from-literal=isactivated_tipsa_registros="$(ISACTIVATED_TIPSA_REGISTROS)" 
-      #               --from-literal=executiondelay_canalizaciones="$(EXECUTIONDELAY_CANALIZACIONES)" 
-      #               --from-literal=executiondelay_estados="$(EXECUTIONDELAY_ESTADOS)" 
-      #               --from-literal=executiondelay_registros="$(EXECUTIONDELAY_REGISTROS)" 
-      #               --from-literal=usr_gls_api="$(USR_GLS_API)" 
-      #               --from-literal=psw_gls_api="$(PSW_GLS_API)" 
-      #               --from-literal=url_gls_api="$(URL_GLS_API)" 
-      #               --from-literal=url_gls_envios_api="$(USR_GLS_ENVIOS_API)" 
-      #               --from-literal=usr_sending_api="$(USR_SENDING_API)" 
-      #               --from-literal=psw_sending_api="$(PSW_SENDING_API)" 
-      #               --from-literal=url_sending_api="$(URL_SENDING_API)" 
-      #               --from-literal=age_tipsa_api="$(AGE_TIPSA_API)" 
-      #               --from-literal=cli_tipsa_api="$(CLI_TIPSA_API)" 
-      #               --from-literal=psw_tipsa_api="$(PSW_TIPSA_API)" 
-      #               --from-literal=url_tipsa_api="$(URL_TIPSA_API)" 
-      #               --from-literal=url_tipsa_login_api="$(URL_TIPSA_LOGIN_API)" 
-      #               --from-literal=url_tipsa_webservice_api="$(URL_TIPSA_WEBSERVICE_API)" 
-      #               --from-literal=usuario_buzon_compartido="$(USUARIO_BUZON_COMPARTIDO)" 
-      #               --from-literal=contrasena_buzon_compartido="$(CONTRASENA_BUZON_COMPARTIDO)" 
-      #               --from-literal=email_buzon_compartido="$(EMAIL_BUZON_COMPARTIDO)" 
-      #               --from-literal=url_servidor_exchange="$(URL_SERVIDOR_EXCHANGE)" 
-      #               --from-literal=url_pedidos_web="$(URL_PEDIDOS_WEB)" 
-      #               --from-literal=url_centros_web="$(URL_CENTROS_WEB)" 
-      #               --from-literal=url_centro_web="$(URL_CENTRO_WEB)" 
-      #           - task: KubernetesManifest@0
-      #             displayName: Creacion del deployment y service
-      #             inputs:
-      #               action: deploy
-      #               manifests: ./operadores.yml
-      #               containers: drnacr.azurecr.io/operadores:$(Build.BuildId)
+      - deployment: K8S_Desarrollo
+        dependsOn: Docker
+        displayName: Deploy to K8S develop cluster
+        #condition: ne(variables['Build.SourceBranchName'], 'main')
+        pool:
+          vmImage: 'ubuntu-latest'      
+        variables:
+          - group: swimmingtool_desarrollo
+          - group: swimmingtool_desarrollo_kv
+        environment: Desarrollo_AKS.default
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - task: Kubernetes@1
+                  displayName: Creacion del ConfigMap
+                  inputs:                  
+                    forceUpdateConfigMap: true
+                    configMapName: variablesentornoswimmingtool
+                    configMapArguments: 
+                      --from-literal=conexionrepositorio="$(CONNECTIONSTRINGSWIMMINGTOOL)" 
+                      --from-literal=conexionrabbit="$(CONNECTIONRABBITMQ)" 
+                      --from-literal=instrumentationkey="$(INSTRUMENTATIONKEY)"                     
+                - task: KubernetesManifest@0
+                  displayName: Creacion del deployment y service
+                  inputs:
+                    action: deploy
+                    manifests: containers/api/deployment.yml
+                    containers: jmhhregistry.azurecr.io/swimmingtool:$(Build.BuildId)
 
       #- deployment: K8S_Produccion
       # displayName: Deploy to K8S production cluster

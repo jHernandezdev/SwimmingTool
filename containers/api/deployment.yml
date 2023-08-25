@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swimmingtool
+
+spec:
+  selector:
+    matchLabels:
+      app: swimmingtool
+
+  template:
+    metadata:
+      labels:
+        app: swimmingtool
+    spec:
+      # imagePullSecrets:
+      # - name: drnacr-key
+      containers:
+      - name: swimmingtool
+        env:
+          - name: "ConexionRepositorio"
+            valueFrom:
+              configMapKeyRef:              
+                name: variablesentornoswimmingtool              
+                key: conexionrepositorio                          
+          - name: "ConexionRabbitMQ"
+            valueFrom:
+              configMapKeyRef:              
+                name: variablesentornoswimmingtool              
+                key: conexionrabbit
+          - name: "APPINSIGHTS_INSTRUMENTATIONKEY"
+            valueFrom:
+              configMapKeyRef:              
+                name: variablesentornoswimmingtool              
+                key: instrumentationkey
+          
+        image: jmhhregistry.azurecr.io/swimmingtool:latest
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: swimmingtool
+spec:
+  type: LoadBalancer  
+  selector:
+    app: swimmingtool
+  ports:
+  - port: 8080
+    targetPort: 80
