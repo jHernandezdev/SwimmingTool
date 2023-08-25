@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // MinimalApi.Endpoint registration
 builder.Services.AddEndpoints();
 
-builder.Services.AddDataAccessServices(builder.Configuration.GetConnectionString("DefaultConnection"));
+builder.Services.AddDataAccessServices(builder.Configuration["DefaultConnection"]);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
