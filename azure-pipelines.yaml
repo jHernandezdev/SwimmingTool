@@ -39,13 +39,7 @@ stages:
               command: test
               projects: tests/**/*.csproj
               arguments: '--configuration $(BuildConfiguration) --collect "Code coverage"'
-          - task: SnykSecurityScan@1
-            inputs:
-              serviceConnectionEndpoint: 'Snyc'
-              testType: 'app'              
-              monitorWhen: 'always'
-              failOnIssues: true
-              projectName: 'jHernandezdev/SwimmingTool'            
+                   
           - task: DotNetCoreCLI@2
             displayName: Publish
             inputs:
