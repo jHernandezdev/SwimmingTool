@@ -104,9 +104,7 @@ stages:
       - job: Docker
         displayName: Build and push container
         pool:
-          vmImage: ubuntu-latest
-        variables:
-        - group: operadores_desarrollo
+          vmImage: ubuntu-latest        
         steps:
           - task: Docker@2
             displayName: Build image
