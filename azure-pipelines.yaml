@@ -150,7 +150,7 @@ stages:
                     configMapArguments: 
                       --from-literal=conexionrepositorio="$(CONNECTIONSTRINGSWIMMINGTOOL)" 
                       --from-literal=conexionrabbit="$(CONNECTIONRABBITMQ)" 
-                      --from-literal=instrumentationkey="$(INSTRUMENTATIONKEY)"
+                      --from-literal=applicationinsights_connectionstring="$(APPLICATIONINSIGHTSCONNECTIONSTRING)"
                       --from-literal=aspnetcoreenvironment="$(ASPNETCORE_ENVIRONMENT)"
                       
                 - task: KubernetesManifest@0

@@ -10,6 +10,7 @@
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'SwimmingTool' " />
 	<ItemGroup>
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
 		<PackageReference Include="MinimalApi.Endpoint" Version="1.2.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 		<PackageReference Include="MinimalApis.Extensions" Version="0.7.0-pre.20220528.28" />

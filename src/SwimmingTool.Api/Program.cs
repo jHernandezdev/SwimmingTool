@@ -20,6 +20,8 @@ builder.Services.AddCommandsAndQueries();
 builder.Services.AddValidators();
 builder.Services.AddValidationPipelineBehaviour();
 
+builder.Services.AddApplicationInsightsTelemetry();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -28,11 +28,11 @@ spec:
               configMapKeyRef:              
                 name: variablesentornoswimmingtool              
                 key: conexionrabbit
-          - name: "APPINSIGHTS_INSTRUMENTATIONKEY"
+          - name: "APPLICATIONINSIGHTS_CONNECTION_STRING"
             valueFrom:
               configMapKeyRef:              
                 name: variablesentornoswimmingtool              
-                key: instrumentationkey
+                key: applicationinsights_connectionstring
           - name: ASPNETCORE_ENVIRONMENT
             valueFrom:
               configMapKeyRef:              
