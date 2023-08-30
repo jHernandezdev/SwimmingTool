@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.32912.340
@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsightsManager", "src\InsightsManager\InsightsManager.csproj", "{014F319D-9194-401E-A819-30BD42D5814F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,10 @@ Global
 		{57041EFF-EA05-49BE-9708-DBF42A7EB8F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57041EFF-EA05-49BE-9708-DBF42A7EB8F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57041EFF-EA05-49BE-9708-DBF42A7EB8F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{014F319D-9194-401E-A819-30BD42D5814F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{014F319D-9194-401E-A819-30BD42D5814F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{014F319D-9194-401E-A819-30BD42D5814F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{014F319D-9194-401E-A819-30BD42D5814F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,5 +69,6 @@ Global
 		{8A1B0EEB-9E96-41DC-A125-54986553AAC4} = {AAB722A7-C4F0-487E-8521-1521B1D742D8}
 		{05FB0630-6F15-4A7D-96DE-F4444AD5AA50} = {AAB722A7-C4F0-487E-8521-1521B1D742D8}
 		{57041EFF-EA05-49BE-9708-DBF42A7EB8F9} = {428A842C-D040-4FFF-B896-0D0C9B29A288}
+		{014F319D-9194-401E-A819-30BD42D5814F} = {AAB722A7-C4F0-487E-8521-1521B1D742D8}
 	EndGlobalSection
 EndGlobal

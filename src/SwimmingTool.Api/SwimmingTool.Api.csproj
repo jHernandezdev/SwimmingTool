@@ -9,8 +9,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'SwimmingTool' " />
-	<ItemGroup>
-		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
+	<ItemGroup>		
 		<PackageReference Include="MinimalApi.Endpoint" Version="1.2.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 		<PackageReference Include="MinimalApis.Extensions" Version="0.7.0-pre.20220528.28" />
@@ -25,6 +24,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\SwimmingTool.Application\SwimmingTool.Application.csproj" />
 	  <ProjectReference Include="..\SwimmingTool.Infrastructure\SwimmingTool.Infrastructure.csproj" />
+	  <ProjectReference Include="..\InsightsManager\InsightsManager.csproj" />
 	</ItemGroup>
 
 </Project>

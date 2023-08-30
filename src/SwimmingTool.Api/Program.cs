@@ -2,8 +2,7 @@ using MinimalApi.Endpoint.Extensions;
 using SwimmingTool.Infrastructure.DataAccess;
 using SwimmingTool.Domain;
 using SwimmingTool.Application.Extensions;
-using Microsoft.ApplicationInsights.Extensibility;
-using SwimmingTool.Api.AppInsight;
+using InsightsManager;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,15 +21,9 @@ builder.Services.AddCommandsAndQueries();
 builder.Services.AddValidators();
 builder.Services.AddValidationPipelineBehaviour();
 
+builder.Services.AddCustomApplicationInsightsTelemetry();
 
-var aiOptions = new Microsoft.ApplicationInsights.AspNetCore.Extensions.ApplicationInsightsServiceOptions
-{
-    EnableAdaptiveSampling = false,
-    EnablePerformanceCounterCollectionModule = false,
-};
-builder.Services.AddApplicationInsightsTelemetry(aiOptions);
-builder.Services.AddSingleton<ITelemetryInitializer, CloudRoleNameTelemetryInitializer>();
-builder.Services.AddSingleton<ITelemetryInitializer, StockTelemetryInitializer>();
+
 
 var app = builder.Build();
 
