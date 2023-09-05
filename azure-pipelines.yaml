@@ -144,7 +144,8 @@ stages:
                 - checkout: self
                 - task: Kubernetes@1
                   displayName: Creacion del ConfigMap
-                  inputs:                  
+                  inputs:
+                    namespace: development
                     forceUpdateConfigMap: true
                     configMapName: variablesentornoswimmingtool
                     configMapArguments: 
