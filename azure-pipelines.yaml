@@ -136,7 +136,7 @@ stages:
         variables:
           - group: swimmingtool_desarrollo
           - group: swimmingtool_desarrollo_kv
-        environment: Desarrollo_AKS.default
+        environment: Desarrollo_AKS.development
         strategy:
           runOnce:
             deploy:
