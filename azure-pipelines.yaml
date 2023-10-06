@@ -100,6 +100,7 @@ stages:
             workingDirectory: .
   
   - stage: CD
+    condition: ne(variables['Build.Reason'], 'PullRequest')
     jobs:
       - job: Docker
         displayName: Build and push container
