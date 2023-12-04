@@ -27,15 +27,16 @@ stages:
     - download: current
       artifact: ${{ parameters.artifactName }}
       
-    - powershell: |
-        $bicepFiles = [string[]]$files = (Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}').FullName
-        $bicepFilesString = $bicepFiles -join "$"
-        $bicepFilesString
-        Write-Host "##vso[task.setvariable variable=bicepFiles;]$bicepFilesString"        
-      displayName: 'PowerShell Script'
-      
-    - ${{ each bicepFile in split(variables.bicepFiles, '$') }}:
-      - script: echo ${{ bicepFile }}
-        displayName: 'Dinamyc Step'
-    - bash: |
-        echo "You can use macro syntax for variables: $(bicepFiles)"
+    - task: AzurePowerShell@5
+      inputs:
+        azureSubscription: 'Visual Studio Enterprise Subscription (2e763394-a7c4-49b0-845f-15f7caf388c5)'
+        ScriptType: 'InlineScript'
+        Inline: |
+          $bicepFiles = (Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}').FullName
+          foreach($biceFile in $bicepFiles) {
+              $bicepParamFile = $biceFile + "param"
+              New-AzResourceGroupDeployment -ResourceGroupName "jmhh-rsg-core" -TemplateFile $biceFile -TemplateParameterFile $bicepParamFile
+          }
+        azurePowerShellVersion: 'LatestVersion'
+        pwsh: true
+    
