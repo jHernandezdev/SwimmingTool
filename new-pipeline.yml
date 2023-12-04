@@ -34,7 +34,7 @@ stages:
       artifact: ${{ parameters.artifactName }}
       
     - powershell: |
-        $directoryInfo = Get-ChildItem $(Build.ArtifactStagingDirectory) | Measure-Object
+        $directoryInfo = Get-ChildItem $(Build.Workspace) | Measure-Object
         $directoryInfo.count
         echo  $directoryInfo.count
         
