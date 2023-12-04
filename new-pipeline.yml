@@ -34,13 +34,13 @@ stages:
       artifact: ${{ parameters.artifactName }}
       
     - powershell: |
-        $directoryInfo = Get-ChildItem $(Pipeline.Workspace) | Measure-Object
+        $directoryInfo = Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}' | Measure-Object
         $directoryInfo.count
         echo  $directoryInfo.count
         
         if ( $directoryInfo.count -eq 0 ) 
-        {
-          echo $directoryInfo.count
+        {          
+          echo $directoryInfo[0]
             
         }
         else
