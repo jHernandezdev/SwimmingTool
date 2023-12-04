@@ -36,9 +36,8 @@ stages:
     - powershell: |
         $directoryInfo = Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}'
         $directoryInfo.count
-        
-        if ( $directoryInfo.count -gt 0 ) 
+        foreach($file in $directoryInfo)
         {          
-          $directoryInfo[0]
+          $file.FullName
         }
       displayName: 'PowerShell Script'
