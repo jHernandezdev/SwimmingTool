@@ -18,7 +18,11 @@
           "Surname": "Hernandez",
           "Certification": ["AZ103", "AZ400"]
         },
-        "value 2"
+        {
+          "Name": "Anna",
+          "Surname": "Mestre",
+          "Certification": ["AZ103", "AZ400"]
+        }
       ]
     }
   }
