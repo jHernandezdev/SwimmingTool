@@ -36,6 +36,6 @@ stages:
       
     - ${{ each bicepFile in split(variables.bicepFiles, '$') }}:
       - script: echo ${{ bicepFile }}
-      
+        displayName: 'Dinamyc Step'
     - bash: |
         echo "You can use macro syntax for variables: $(bicepFiles)"
