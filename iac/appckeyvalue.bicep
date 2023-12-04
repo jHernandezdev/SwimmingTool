@@ -13,6 +13,9 @@ param contentType string = 'application/json'
 @description('Adds tags for the key-value resources. It\'s optional')
 param tags object = {}
 
+@description('Environment')
+param environment string
+
 resource configStore 'Microsoft.AppConfiguration/configurationStores@2023-03-01' existing = {
   name: configStoreName
 }
