@@ -35,7 +35,7 @@ stages:
           $bicepFiles = (Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}' -Filter *.bicep).FullName
           foreach($biceFile in $bicepFiles) {
               $bicepParamFile = $biceFile.Substring(0, $biceFile.Length - 5) + "json"
-              New-AzResourceGroupDeployment -ResourceGroupName "jmhh-rsg-core" -TemplateFile $biceFile -TemplateParameterFile $$bicepParamFile -environment: "DEV"
+              New-AzResourceGroupDeployment -ResourceGroupName "jmhh-rsg-core" -TemplateFile $biceFile -TemplateParameterFile $bicepParamFile -environment: "DEV"
           }
         azurePowerShellVersion: 'LatestVersion'
         pwsh: true
