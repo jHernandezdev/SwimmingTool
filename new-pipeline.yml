@@ -13,13 +13,13 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:   
-    - task: CopyFiles@2
-      displayName: 'Copy scripts'
-      inputs:
-        contents: '${{ parameters.pathToFiles }}/**'
-        targetFolder: '$(Build.ArtifactStagingDirectory)'
+    # - task: CopyFiles@2
+    #   displayName: 'Copy scripts'
+    #   inputs:
+    #     contents: '${{ parameters.pathToFiles }}/**'
+    #     targetFolder: '$(Build.ArtifactStagingDirectory)'
 
-    - publish: '$(Build.ArtifactStagingDirectory)/${{ parameters.pathToFiles }}'
+    - publish: '$(Build.SourcesDirectory)/${{ parameters.pathToFiles }}'
       displayName: 'Publish script'
       artifact: ${{ parameters.artifactName }}
 
