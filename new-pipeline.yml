@@ -36,5 +36,7 @@ stages:
         #   $file.FullName
         # }
       displayName: 'PowerShell Script'
-    - bash: |
-        echo "You can use macro syntax for variables: $(bicepFiles)"
+    - ${{ each value in variables.bicepFiles }}:
+      - script: echo ${{ value.FullName }}
+    # - bash: |
+    #     echo "You can use macro syntax for variables: $(bicepFiles)"
