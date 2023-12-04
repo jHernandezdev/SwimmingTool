@@ -32,3 +32,21 @@ stages:
     steps:
     - download: current
       artifact: ${{ parameters.artifactName }}
+      
+    - powershell: |
+        $directoryInfo = Get-ChildItem $(Build.ArtifactStagingDirectory) | Measure-Object
+        $directoryInfo.count
+        echo  $directoryInfo.count
+        
+        if ( $directoryInfo.count -eq 0 ) 
+        {
+          echo $directoryInfo.count
+            
+        }
+        else
+        
+        {
+          echo $directoryInfo.count
+          
+        }
+      displayName: 'PowerShell Script'
