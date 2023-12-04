@@ -40,5 +40,4 @@ stages:
               New-AzResourceGroupDeployment -ResourceGroupName "jmhh-rsg-core" -TemplateFile "/home/vsts/work/1/iac/appckeyvalue.bicep" -TemplateParameterFile "/home/vsts/work/1/iac/appckeyvalue.bicepparam" -environment: "DEV"
           }
         azurePowerShellVersion: 'LatestVersion'
-        pwsh: true
     
