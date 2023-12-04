@@ -13,7 +13,11 @@
     },
      "keyValueValues": {
       "value": [
-        "value 1",
+        {
+          "Name": "Jose",
+          "Surname": "Hernandez",
+          "Certification": ["AZ103", "AZ400"]
+        },
         "value 2"
       ]
     }
