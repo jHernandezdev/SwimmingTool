@@ -32,7 +32,7 @@ stages:
         Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}'
         Write-Host "##vso[task.setvariable variable=bicepFiles;]$bicepFiles"
         $directoryInfo.count
-        foreach($file in $directoryInfo)
+        foreach($file in $bicepFiles)
         {         
           $file
         }
