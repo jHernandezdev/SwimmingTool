@@ -29,7 +29,7 @@ stages:
       
     - powershell: |
         $bicepFiles = Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}' | Select FullName
-        echo "##vso[task.setvariable variable=bicepFiles;]$bicepFiles"
+        Write-Host "##vso[task.setvariable variable=bicepFiles;]$bicepFiles"
         # $directoryInfo.count
         # foreach($file in $directoryInfo)
         # {          
