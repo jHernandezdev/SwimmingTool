@@ -36,7 +36,7 @@ stages:
           foreach($biceFile in $bicepFiles) {
               $bicepParamFile = $biceFile.Substring(0, $biceFile.Length - 5) + "json"
               $bicepParamFileBicep = $biceFile + "param"
-              New-AzResourceGroupDeployment -ResourceGroupName "jmhh-rsg-core" -TemplateFile $biceFile -TemplateParameterFile $bicepParamFileBicep -environment: "DEV"
+              New-AzResourceGroupDeployment -ResourceGroupName "jmhh-rsg-core" -TemplateFile $biceFile -TemplateParameterFile $bicepParamFile -environment: "DEV"
           }
         azurePowerShellVersion: 'LatestVersion'
         pwsh: true
