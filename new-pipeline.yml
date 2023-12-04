@@ -13,7 +13,7 @@ stages:
         contents: 'iac/**'
         targetFolder: '$(Build.ArtifactStagingDirectory)'
 
-    - publish: '$(Build.ArtifactStagingDirectory)/scripts'
+    - publish: '$(Build.ArtifactStagingDirectory)/iac'
       displayName: 'Publish script'
       artifact: drop
 
