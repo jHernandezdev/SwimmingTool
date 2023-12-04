@@ -30,11 +30,11 @@ stages:
     - powershell: |
         $bicepFiles = Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}' | Select FullName
         Write-Host "##vso[task.setvariable variable=bicepFiles;]$bicepFiles"
-        # $directoryInfo.count
-        # foreach($file in $directoryInfo)
-        # {          
-        #   $file.FullName
-        # }
+        $directoryInfo.count
+        foreach($file in $directoryInfo)
+        {          
+          $file.FullName
+        }
       displayName: 'PowerShell Script'
     - ${{ each value in variables.bicepFiles }}:
       - script: echo ${{ value.FullName }}
