@@ -37,7 +37,7 @@ stages:
               $bicepParamFile = $biceFile + "param"
               $biceFile
               $bicepParamFile
-              New-AzResourceGroupDeployment -ResourceGroupName "jmhh-rsg-core" -TemplateFile $biceFile -TemplateParameterFile $bicepParamFile -environment: "DEV"
+              New-AzResourceGroupDeployment -ResourceGroupName "jmhh-rsg-core" -TemplateFile "$biceFile" -TemplateParameterFile "$bicepParamFile" -environment: "DEV"
           }
         azurePowerShellVersion: 'LatestVersion'
         pwsh: true
