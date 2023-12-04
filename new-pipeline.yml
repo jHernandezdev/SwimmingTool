@@ -13,12 +13,6 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:   
-    # - task: CopyFiles@2
-    #   displayName: 'Copy scripts'
-    #   inputs:
-    #     contents: '${{ parameters.pathToFiles }}/**'
-    #     targetFolder: '$(Build.ArtifactStagingDirectory)'
-
     - publish: '$(Build.SourcesDirectory)/${{ parameters.pathToFiles }}'
       displayName: 'Publish script'
       artifact: ${{ parameters.artifactName }}
@@ -34,10 +28,13 @@ stages:
       artifact: ${{ parameters.artifactName }}
       
     - powershell: |
-        $directoryInfo = Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}'
-        $directoryInfo.count
-        foreach($file in $directoryInfo)
-        {          
-          $file.FullName
-        }
+        $bicepFiles = Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}' | Select FullName
+        echo "##vso[task.setvariable variable=bicepFiles;]$bicepFiles"
+        # $directoryInfo.count
+        # foreach($file in $directoryInfo)
+        # {          
+        #   $file.FullName
+        # }
       displayName: 'PowerShell Script'
+    - bash: |
+        echo "You can use macro syntax for variables: $(bicepFiles)"
