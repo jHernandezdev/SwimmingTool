@@ -37,7 +37,7 @@ stages:
               $bicepParamFile = $biceFile + "param"
               Get-Content $biceFile
               Get-Content $bicepParamFile
-              New-AzResourceGroupDeployment -ResourceGroupName "jmhh-rsg-core" -TemplateFile "/home/vsts/work/1/iac/appckeyvalue.bicep" -TemplateParameterFile "/home/vsts/work/1/iac/appckeyvalue.bicepparam" -environment: "DEV"
+              New-AzResourceGroupDeployment -ResourceGroupName "jmhh-rsg-core" -TemplateFile "/home/vsts/work/1/iac/appckeyvalue.bicep" -TemplateParameterFile "/home/vsts/work/1/iac/appckeyvalue.json" -environment: "DEV"
           }
         azurePowerShellVersion: 'LatestVersion'
     
