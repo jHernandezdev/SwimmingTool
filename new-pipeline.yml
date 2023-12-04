@@ -37,7 +37,8 @@ stages:
           $file
         }
       displayName: 'PowerShell Script'
-    - ${{ each value in variables.bicepFiles }}:
+      
+    - ${{ each value in variables['bicepFiles'] }}:
       - script: echo ${{ value }}
       
     - bash: |
