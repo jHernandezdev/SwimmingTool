@@ -28,18 +28,14 @@ stages:
       artifact: ${{ parameters.artifactName }}
       
     - powershell: |
-        $bicepFiles = Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}'
-        Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}'
-        Write-Host "##vso[task.setvariable variable=bicepFiles;]$bicepFiles"
-        $directoryInfo.count
-        foreach($file in $bicepFiles)
-        {         
-          $file
-        }
+        $bicepFiles = [string[]]$files = (Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}').FullName
+        $bicepFilesString = $bicepFiles -join "$"
+      
+        Write-Host "##vso[task.setvariable variable=bicepFiles;]$bicepFilesString"        
       displayName: 'PowerShell Script'
       
-    - ${{ each value in variables['bicepFiles'] }}:
-      - script: echo ${{ value }}
+    - ${{ each bicepFile in split(variables.bicepFiles, '$') }}:
+      - script: echo ${{ bicepFile }}
       
     - bash: |
         echo "You can use macro syntax for variables: $(bicepFiles)"
