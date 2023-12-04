@@ -1,3 +1,9 @@
+parameters:
+  - name: pathToFiles
+    type: string
+  - name: artifactName
+    type: string
+
 trigger: none
 
 stages:
@@ -10,12 +16,12 @@ stages:
     - task: CopyFiles@2
       displayName: 'Copy scripts'
       inputs:
-        contents: 'iac/**'
+        contents: '${{ parameters.pathToFiles }}'
         targetFolder: '$(Build.ArtifactStagingDirectory)'
 
-    - publish: '$(Build.ArtifactStagingDirectory)/iac'
+    - publish: '$(Build.ArtifactStagingDirectory)/${{ parameters.pathToFiles }}'
       displayName: 'Publish script'
-      artifact: drop
+      artifact: ${{ parameters.artifactName }}
 
 - stage: test
   dependsOn: build
@@ -25,4 +31,4 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     - download: current
-      artifact: drop
+      artifact: ${{ parameters.artifactName }}
