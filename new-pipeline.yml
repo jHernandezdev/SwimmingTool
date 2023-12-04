@@ -30,7 +30,7 @@ stages:
     - powershell: |
         $bicepFiles = [string[]]$files = (Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}').FullName
         $bicepFilesString = $bicepFiles -join "$"
-      
+        $bicepFilesString
         Write-Host "##vso[task.setvariable variable=bicepFiles;]$bicepFilesString"        
       displayName: 'PowerShell Script'
       
