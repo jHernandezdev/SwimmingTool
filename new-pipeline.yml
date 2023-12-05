@@ -45,7 +45,7 @@ stages:
                 -TemplateFile $biceFile 
                 -TemplateParameterFile $bicepParamFile 
                 -environment: "DEV"
-            else {
+            } else {
               New-AzResourceGroupDeployment 
                 -ResourceGroupName ${{ parameters.resourceGroup }}
                 -TemplateFile $biceFile 
