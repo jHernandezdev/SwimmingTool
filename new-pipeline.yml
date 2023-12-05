@@ -1,8 +1,10 @@
 parameters:
   - name: pathToFiles
     type: string
+    default: "iac"
   - name: artifactName
     type: string
+    default: "iac"
   - name: resourceGroup
     type: string
     default: "jmhh-rsg-core" 
