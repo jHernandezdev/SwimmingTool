@@ -40,15 +40,15 @@ stages:
             $bicepParamFile = $biceFile.Substring(0, $biceFile.Length - 5) + "json"
             $bicepParamFileBicep = $biceFile + "param"
             If (Test-Path -Path $bicepParamFile) {
-              New-AzResourceGroupDeployment 
-                -ResourceGroupName ${{ parameters.resourceGroup }}
-                -TemplateFile $biceFile 
-                -TemplateParameterFile $bicepParamFile 
+              New-AzResourceGroupDeployment `
+                -ResourceGroupName ${{ parameters.resourceGroup }} `
+                -TemplateFile $biceFile `
+                -TemplateParameterFile $bicepParamFile `
                 -environment: "DEV"
             } else {
-              New-AzResourceGroupDeployment 
-                -ResourceGroupName ${{ parameters.resourceGroup }}
-                -TemplateFile $biceFile 
+              New-AzResourceGroupDeployment `
+                -ResourceGroupName ${{ parameters.resourceGroup }} `
+                -TemplateFile $biceFile `
                 -environment: "DEV"
             }
           }
