@@ -34,6 +34,7 @@ stages:
         azureSubscription: 'Visual Studio Enterprise Subscription (2e763394-a7c4-49b0-845f-15f7caf388c5)'
         ScriptType: 'InlineScript'
         Inline: |
+          Update-Module Az
           $bicepFiles = (Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}' -Filter *.bicep).FullName
           
           foreach($biceFile in $bicepFiles) {
