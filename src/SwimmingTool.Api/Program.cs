@@ -3,6 +3,7 @@ using SwimmingTool.Infrastructure.DataAccess;
 using SwimmingTool.Domain;
 using SwimmingTool.Application.Extensions;
 using InsightsManager;
+using SwimmingTool.Api.HostedServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +24,7 @@ builder.Services.AddValidationPipelineBehaviour();
 
 builder.Services.AddCustomApplicationInsightsTelemetry();
 
-
+builder.Services.AddHostedService<CollectMetricsHostedService>();
 
 var app = builder.Build();
 
