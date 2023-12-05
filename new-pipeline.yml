@@ -3,7 +3,9 @@ parameters:
     type: string
   - name: artifactName
     type: string
-
+  - name: resourceGroup
+    type: string
+    default: "jmhh-rsg-core" 
 trigger: none
 
 stages:
@@ -33,10 +35,22 @@ stages:
         ScriptType: 'InlineScript'
         Inline: |
           $bicepFiles = (Get-ChildItem '$(Pipeline.Workspace)/${{ parameters.pathToFiles }}' -Filter *.bicep).FullName
+          
           foreach($biceFile in $bicepFiles) {
-              $bicepParamFile = $biceFile.Substring(0, $biceFile.Length - 5) + "json"
-              $bicepParamFileBicep = $biceFile + "param"
-              New-AzResourceGroupDeployment -ResourceGroupName "jmhh-rsg-core" -TemplateFile $biceFile -TemplateParameterFile $bicepParamFile -environment: "DEV"
+            $bicepParamFile = $biceFile.Substring(0, $biceFile.Length - 5) + "json"
+            $bicepParamFileBicep = $biceFile + "param"
+            If (Test-Path -Path $bicepParamFile) {
+              New-AzResourceGroupDeployment 
+                -ResourceGroupName ${{ parameters.resourceGroup }}
+                -TemplateFile $biceFile 
+                -TemplateParameterFile $bicepParamFile 
+                -environment: "DEV"
+            else {
+              New-AzResourceGroupDeployment 
+                -ResourceGroupName ${{ parameters.resourceGroup }}
+                -TemplateFile $biceFile 
+                -environment: "DEV"
+            }
           }
         azurePowerShellVersion: 'LatestVersion'
         pwsh: true
