@@ -1,15 +1,8 @@
 # SwimmingTool
 Version 1.4
-::: mermaid
-sequenceDiagram
-    Publicador->>I: Hello Bob, how are you ?
-    Bob->>Alice: Fine, thank you. And you?
-    create participant Carl
-    Alice->>Carl: Hi Carl!
-    create actor D as Donald
-    Carl->>D: Hi!
-    destroy Carl
-    Alice-xCarl: We are too many
-    destroy Bob
-    Bob->>Alice: I agree
-:::
+::: moniker range=">= azure-devops-2019"
+
+> [!NOTE]  
+> There is no Markdown syntax that supports underlining text. Within a wiki page, you can use the HTML `<u>` tag to generate underlined text. For example, `<u>underlined text</u>` yields <u>underlined text</u>.
+
+::: moniker-end
